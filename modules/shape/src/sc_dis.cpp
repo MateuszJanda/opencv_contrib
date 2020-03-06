@@ -513,7 +513,10 @@ void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatc
                            std::vector<int> &inliers2, int sizeScd1, int sizeScd2)
 {
     std::cout << "costMatrix.size:" << costMatrix.size << std::endl;
-    std::cout << "costMatrix:" << format(costMatrix, Formatter::FMT_PYTHON) << costMatrix << std::endl;
+    std::cout << "costMatrix.rows:" << costMatrix.rows << std::endl;
+    std::cout << "costMatrix.cols:" << costMatrix.cols << std::endl;
+    std::cout << "costMatrix:" << format(costMatrix, Formatter::FMT_NUMPY) << std::endl;
+//    std::cout << "costMatrix:" << format(costMatrix.data, Formatter::FMT_NUMPY) << costMatrix << std::endl;
 
 
     std::vector<int> free(costMatrix.rows, 0), collist(costMatrix.rows, 0);
