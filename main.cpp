@@ -1,5 +1,6 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/shape/hist_cost.hpp>
+#include <opencv2/shape/shape_distance.hpp>
 #include <iostream>
 
 using namespace cv;
