@@ -49,6 +49,8 @@
 #include "opencv2/core.hpp"
 #include "scd_def.hpp"
 #include <limits>
+#include <iostream>
+
 
 namespace cv
 {
@@ -510,6 +512,10 @@ void SCDMatcher::buildCostMatrix(const cv::Mat &descriptors1, const cv::Mat &des
 void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatches, std::vector<int> &inliers1,
                            std::vector<int> &inliers2, int sizeScd1, int sizeScd2)
 {
+    std::cout << "costMatrix.size:" << costMatrix.size << std::endl;
+    std::cout << "costMatrix:" << format(costMatrix, Formatter::FMT_PYTHON) << costMatrix << std::endl;
+
+
     std::vector<int> free(costMatrix.rows, 0), collist(costMatrix.rows, 0);
     std::vector<int> matches(costMatrix.rows, 0), colsol(costMatrix.rows), rowsol(costMatrix.rows);
     std::vector<float> d(costMatrix.rows), pred(costMatrix.rows), v(costMatrix.rows);
