@@ -499,6 +499,22 @@ void SCDMatcher::matchDescriptors(cv::Mat &descriptors1, cv::Mat &descriptors2, 
 
     // Solve the matching problem using the hungarian method //
     hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+
+    std::cout << "Testing hungarian " << std::endl;
+    cv::Mat testCostMat = (cv::Mat_<int>(3, 3) << 400, 150, 400, 400, 450, 600, 300, 225, 300);
+    std::vector<cv::DMatch> testMatches;
+//    hungarian(testCostMat, testMatches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+    hungarian(testCostMat, testMatches, inliers1, inliers2, testCostMat.rows, testCostMat.rows);
+
+    int total_cost = 0;
+    for (const auto& m : testMatches) {
+        int row = m.queryIdx;
+        int col = m.trainIdx;
+        total_cost += testCostMat.at<int>(row, col);
+    }
+    std::cout << "Total cost: " << total_cost << std::endl;
+
+    std::cout << "Testing end" << std::endl;
 }
 
 void SCDMatcher::buildCostMatrix(const cv::Mat &descriptors1, const cv::Mat &descriptors2,
@@ -516,6 +532,7 @@ void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatc
     std::cout << "costMatrix.rows:" << costMatrix.rows << std::endl;
     std::cout << "costMatrix.cols:" << costMatrix.cols << std::endl;
     std::cout << "costMatrix:" << format(costMatrix, Formatter::FMT_NUMPY) << std::endl;
+    std::cout << "sizeScd1 sizeScd2 " << sizeScd1 << " " << sizeScd2 << std::endl;
 
     std::vector<int> free(costMatrix.rows, 0), collist(costMatrix.rows, 0);
     std::vector<int> matches(costMatrix.rows, 0), colsol(costMatrix.rows), rowsol(costMatrix.rows);
