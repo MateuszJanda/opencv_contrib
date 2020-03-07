@@ -516,8 +516,6 @@ void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatc
     std::cout << "costMatrix.rows:" << costMatrix.rows << std::endl;
     std::cout << "costMatrix.cols:" << costMatrix.cols << std::endl;
     std::cout << "costMatrix:" << format(costMatrix, Formatter::FMT_NUMPY) << std::endl;
-//    std::cout << "costMatrix:" << format(costMatrix.data, Formatter::FMT_NUMPY) << costMatrix << std::endl;
-
 
     std::vector<int> free(costMatrix.rows, 0), collist(costMatrix.rows, 0);
     std::vector<int> matches(costMatrix.rows, 0), colsol(costMatrix.rows), rowsol(costMatrix.rows);
@@ -776,7 +774,7 @@ void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatc
     // Save in a DMatch vector
     for (i=0;i<costMatrix.cols;i++)
     {
-        cv::DMatch singleMatch(colsol[i],i,costMatrix.at<float>(colsol[i],i));//queryIdx,trainIdx,distance
+        cv::DMatch singleMatch(colsol[i], i, costMatrix.at<float>(colsol[i],i));//queryIdx,trainIdx,distance
         outMatches.push_back(singleMatch);
     }
 
@@ -797,6 +795,12 @@ void SCDMatcher::hungarian(cv::Mat &costMatrix, std::vector<cv::DMatch> &outMatc
         else
             inliers2[kc]=0;
     }
+
+    std::cout << "outMatches = [" << std::endl;
+    for(const auto& m : outMatches) {
+        std::cout << "    (" << m.queryIdx << ", " << m.trainIdx << ", " << m.distance << ")," << std::endl;
+    }
+    std::cout << "]" << std::endl;
 }
 
 }
