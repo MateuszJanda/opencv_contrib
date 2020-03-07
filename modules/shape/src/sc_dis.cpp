@@ -501,16 +501,20 @@ void SCDMatcher::matchDescriptors(cv::Mat &descriptors1, cv::Mat &descriptors2, 
     hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
 
     std::cout << "Testing hungarian " << std::endl;
-    cv::Mat testCostMat = (cv::Mat_<int>(3, 3) << 400, 150, 400, 400, 450, 600, 300, 225, 300);
+//    cv::Mat testCostMat = (cv::Mat_<int>(3, 3) << 400, 150, 400, 400, 450, 600, 300, 225, 300);
+//    cv::Mat testCostMat = (cv::Mat_<int>(3, 3) << 10, 10, 8, 9, 8, 1, 9, 7, 4);
     std::vector<cv::DMatch> testMatches;
 //    hungarian(testCostMat, testMatches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
-    hungarian(testCostMat, testMatches, inliers1, inliers2, testCostMat.rows, testCostMat.rows);
+//    hungarian(testCostMat, testMatches, inliers1, inliers2, testCostMat.rows, testCostMat.rows);
 
-    int total_cost = 0;
+
+    hungarian(costMat, testMatches, inliers1, inliers2, 37, 37);
+
+    float total_cost = 0;
     for (const auto& m : testMatches) {
         int row = m.queryIdx;
         int col = m.trainIdx;
-        total_cost += testCostMat.at<int>(row, col);
+        total_cost += costMat.at<float>(row, col);
     }
     std::cout << "Total cost: " << total_cost << std::endl;
 
