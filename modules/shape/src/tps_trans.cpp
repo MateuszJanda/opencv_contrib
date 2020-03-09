@@ -211,11 +211,11 @@ void ThinPlateSplineShapeTransformerImpl::estimateTransformation(InputArray _pts
     std::vector<DMatch> matches;
     for (size_t i=0; i<_matches.size(); i++)
     {
-//        if (_matches[i].queryIdx<pts1.cols &&
-//            _matches[i].trainIdx<pts2.cols)
-//        {
+        if (_matches[i].queryIdx<pts1.cols &&
+            _matches[i].trainIdx<pts2.cols)
+        {
             matches.push_back(_matches[i]);
-//        }
+        }
     }
 
     std::cout << "estimateTransformation() matches.size: " << matches.size() << std::endl;
