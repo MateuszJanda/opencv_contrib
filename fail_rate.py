@@ -31,6 +31,9 @@ def dist(ch1, ch2):
 total = 0
 fail = 0
 for ch1, ch2 in itertools.combinations(string.ascii_letters + string.digits, r=2):
+    # Interesting cases
+    if (ch1, ch2) in [('r', 'T'), ('s', 'F')]:
+        continue
     total += 1
     try:
         dist(ch1, ch2)
