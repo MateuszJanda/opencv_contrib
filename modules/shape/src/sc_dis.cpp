@@ -497,8 +497,16 @@ void SCDMatcher::matchDescriptors(cv::Mat &descriptors1, cv::Mat &descriptors2, 
     cv::Mat costMat;
     buildCostMatrix(descriptors1, descriptors2, costMat, comparer);
 
+    const int height = descriptors1.rows;
+    const int width = descriptors2.rows;
+
+//    cv::Mat trueCostMat(costMat, cv::Rect(0, 0, width, height));
+    cv::Mat trueCostMat(costMat, cv::Rect(0, 0, std::max(width, height), std::max(width, height)));
+
+
     // Solve the matching problem using the hungarian method //
-    hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+//    hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+    hungarian(trueCostMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
 //    hungarian(costMat, matches, inliers1, inliers2, costMat.rows, costMat.rows);
 /*
     std::cout << "Testing hungarian " << std::endl;
