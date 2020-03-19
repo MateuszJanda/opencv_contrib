@@ -13,7 +13,7 @@ def create_img(ch, pos_x=3, pos_y=2):
     draw.text(xy=(pos_x, pos_y), text=ch, fill=255, font=font, spacing=0)
 
     # display(img)  # for jupyter-qtconsole/notebook
-    # img.save("%s.png" % ch)
+    img.save("%s.png" % ch)
     return np.array(img)
 
 
@@ -28,16 +28,19 @@ def dist(ch1, ch2):
     print('%s <-> %s: sd %f' % (ch1, ch2, sd.computeDistance(con1[0], con2[0])))
 
 
-total = 0
-fail = 0
-for ch1, ch2 in itertools.combinations(string.ascii_letters + string.digits, r=2):
-    # Interesting cases
-    if (ch1, ch2) in [('r', 'T'), ('s', 'F')]:
-        continue
-    total += 1
-    try:
-        dist(ch1, ch2)
-    except:
-        fail += 1
+# total = 0
+# fail = 0
+# for ch1, ch2 in itertools.combinations(string.ascii_letters + string.digits, r=2):
+#     # Interesting cases
+#     if (ch1, ch2) in [('r', 'T'), ('s', 'F')]:
+#         continue
+#     total += 1
+#     try:
+#         dist(ch1, ch2)
+#     except:
+#         fail += 1
 
-print("Fail rate %0.2f%%" % ((fail/total) * 100))
+# print("Fail rate %0.2f%%" % ((fail/total) * 100))
+
+
+dist('r', 'T')
