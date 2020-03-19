@@ -494,6 +494,7 @@ void SCDMatcher::matchDescriptors(cv::Mat &descriptors1, cv::Mat &descriptors2, 
     matches.clear();
 
     // Build the cost Matrix between descriptors //
+    std::cout << "Build the cost Matrix " << std::endl;
     cv::Mat costMat;
     buildCostMatrix(descriptors1, descriptors2, costMat, comparer);
 
@@ -505,8 +506,9 @@ void SCDMatcher::matchDescriptors(cv::Mat &descriptors1, cv::Mat &descriptors2, 
 
 
     // Solve the matching problem using the hungarian method //
-//    hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
-    hungarian(trueCostMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+    std::cout << "Solving hungarian method " << std::endl;
+    hungarian(costMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
+//    hungarian(trueCostMat, matches, inliers1, inliers2, descriptors1.rows, descriptors2.rows);
 //    hungarian(costMat, matches, inliers1, inliers2, costMat.rows, costMat.rows);
 /*
     std::cout << "Testing hungarian " << std::endl;
