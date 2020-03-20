@@ -45,14 +45,23 @@
 namespace opencv_test { namespace {
 
 
-class HungarianMethodTest
+class HungarianMethod : public cv::SCDMatcher
 {
+public:
+    void hungarian(cv::Mat& costMatrix, std::vector<cv::DMatch>& outMatches, std::vector<int> &inliers1,
+                   std::vector<int> &inliers2, int sizeScd1=0, int sizeScd2=0)
+    {
+        cv::SCDMatcher::hungarian(costMatrix, outMatches, inliers1, inliers2, sizeScd1, sizeScd2);
+    }
+};
 
+class HungarianMethodTest : public cvtest::BaseTest
+{
 };
 
 TEST(HungarianMethodTest, regression)
 {
-    cv::SCDMatcher m;
+    HungarianMethod m;
     std::cout << m.getMatchingCost() << std::endl;
 
 //    cv::Mat costMatrix = (cv::Mat_<int>(3, 3) << 400, 150, 400, 400, 450, 600, 300, 225, 300);
@@ -61,8 +70,8 @@ TEST(HungarianMethodTest, regression)
 //    std::vector<int> inliers2;
 //    int sizeScd1=0;
 //    int sizeScd2=0;
-//    AAA a;
-//    a.hungarian(costMatrix, outMatches, inliers1, inliers2, sizeScd1, sizeScd2);
+
+//    m.hungarian(costMatrix, outMatches, inliers1, inliers2, sizeScd1, sizeScd2);
 }
 
 
