@@ -186,7 +186,7 @@ public:
 CV_EXPORTS_W Ptr<ShapeContextDistanceExtractor>
     createShapeContextDistanceExtractor(int nAngularBins=12, int nRadialBins=4,
                                         float innerRadius=0.2f, float outerRadius=2, int iterations=3,
-                                        const Ptr<HistogramCostExtractor> &comparer = createChiHistogramCostExtractor(),
+                                        const Ptr<HistogramCostExtractor> &comparer = createChiHistogramCostExtractor(0),
                                         const Ptr<ShapeTransformer> &transformer = createThinPlateSplineShapeTransformer());
 
 /***********************************************************************************/

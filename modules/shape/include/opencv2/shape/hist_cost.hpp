@@ -95,7 +95,7 @@ CV_EXPORTS_W Ptr<HistogramCostExtractor>
 class CV_EXPORTS_W ChiHistogramCostExtractor : public HistogramCostExtractor
 {};
 
-CV_EXPORTS_W Ptr<HistogramCostExtractor> createChiHistogramCostExtractor(int nDummies=0, float defaultCost=0.2f);
+CV_EXPORTS_W Ptr<HistogramCostExtractor> createChiHistogramCostExtractor(int nDummies=25, float defaultCost=0.2f);
 
 /** @brief An EMD-L1 based cost extraction. :
  */
